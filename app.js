@@ -11,7 +11,7 @@ var cors = require('cors');
 var User = require("./models/user");
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var applicantRouter = require('./routes/applicant');
 
 var app = express();
 
@@ -39,8 +39,8 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/', indexRouter);
+app.use('/api/applicant', applicantRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

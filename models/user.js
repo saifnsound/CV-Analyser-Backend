@@ -16,6 +16,10 @@ var UserSchema = new mongoose.Schema({
     username: {
         type: String,
         unique: true
+    },
+    updatedProfile: {
+        type: Boolean,
+        default: false
     }
 });
 
