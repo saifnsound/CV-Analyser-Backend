@@ -8,6 +8,7 @@ var ApplicantSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
+        unique: true
     },
     mobileNumber: {
         type: String,
@@ -34,16 +35,9 @@ var ApplicantSchema = new mongoose.Schema({
         codeChef: {
             type: String
         },
-        HackerRank: {
+        hackerRank: {
             type: String
         }
-    },
-    user: {
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        },
-        username: String
     }
 });
 
