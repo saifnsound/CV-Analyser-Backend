@@ -5,6 +5,8 @@ var router = express.Router();
 var middleware = require('../middleware/index');
 
 router.post("/signup", (req, res) => {
+	// var obj = JSON.parse(req.body);
+	// console.log(req.body);
 	var newUser = new User({
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
@@ -13,12 +15,15 @@ router.post("/signup", (req, res) => {
 	});
 	User.register(newUser, req.body.password, function (err, user) {
 		if (err) {
-			res.send(err);
+			res.send({
+				err,
+				signup: false
+			});
 		}
 		passport.authenticate("local")(req, res, function () {
-			res.send({
-				message: 'Registered new user.'
-			});
+			res.send(JSON.stringify({
+				signup: true
+			}));
 		});
 	});
 });
