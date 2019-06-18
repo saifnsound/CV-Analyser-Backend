@@ -8,7 +8,8 @@ router.post("/signup", (req, res) => {
 	var newUser = new User({
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
-		username: req.body.username
+		username: req.body.username,
+		profileType: req.body.profileType
 	});
 	User.register(newUser, req.body.password, function (err, user) {
 		if (err) {
@@ -23,10 +24,19 @@ router.post("/signup", (req, res) => {
 });
 
 router.post("/login", passport.authenticate("local"), function (req, res) {
-	res.send({
-		username: req.user.username,
-		message: "User logged in."
-	});
+	User.findOne({
+		username: req.user.username
+	}, (err, info) => {
+		if (err) res.send({
+			message: err
+		})
+		else {
+			res.send({
+				user: info,
+				message: "User logged in."
+			})
+		}
+	})
 });
 
 router.get("/logout", (req, res) => {
