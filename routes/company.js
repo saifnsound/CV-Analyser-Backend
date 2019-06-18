@@ -1,12 +1,11 @@
 var express = require('express');
-var passport = require("passport");
 var User = require("../models/user");
 var router = express.Router();
-var Applicant = require('../models/applicant');
+var Company = require('../models/company');
 
 router.get("/info", (req, res) => {
-    Applicant.findOne({
-        email: req.user.username
+    Company.findOne({
+        username: req.user.username
     }, (err, info) => {
         if (err) res.send({
             message: err
@@ -18,21 +17,18 @@ router.get("/info", (req, res) => {
 })
 
 router.post("/edit", (req, res) => {
-    Applicant.findOneAndUpdate({
+    Company.findOneAndUpdate({
         username: req.user.username
     }, {
         $set: {
-            fullName: req.body.fullName,
-            mobileNumber: req.body.mobileNumber,
-            location: req.body.location,
-            skypeID: req.body.skypeID,
-            githubID: req.body.githubID,
-            linkedinID: req.body.linkedinID,
-            programming: {
-                codeForces: req.body.codeForces,
-                codeChef: req.body.codeChef,
-                hackerRank: req.body.hackerRank
-            }
+            name: req.body.name,
+            website: req.body.website,
+            industry: req.body.industry,
+            companySize: req.body.companySize,
+            headquarters: req.body.headquarters,
+            type: req.body.type,
+            founded: req.body.founded,
+            specialties: req.body.specialties
         }
     }, {
         upsert: true,
@@ -57,7 +53,6 @@ router.post("/edit", (req, res) => {
             })
         }
     })
-
 })
 
 module.exports = router;

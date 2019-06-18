@@ -20,6 +20,11 @@ var UserSchema = new mongoose.Schema({
     updatedProfile: {
         type: Boolean,
         default: false
+    },
+    profileType: {
+        type: String,
+        require: true,
+        enum: ['Applicant', 'Company']
     }
 });
 

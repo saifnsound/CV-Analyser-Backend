@@ -5,11 +5,6 @@ var ApplicantSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
     mobileNumber: {
         type: String,
         required: true
@@ -38,6 +33,10 @@ var ApplicantSchema = new mongoose.Schema({
         hackerRank: {
             type: String
         }
+    },
+    username: {
+        type: String,
+        unique: true
     }
 });
 
