@@ -17,12 +17,12 @@ router.post("/signup", (req, res) => {
 		if (err) {
 			res.send({
 				err,
-				signup: false
+				success: false
 			});
 		}
 		passport.authenticate("local")(req, res, function () {
 			res.send(JSON.stringify({
-				signup: true
+				success: true
 			}));
 		});
 	});
@@ -33,11 +33,13 @@ router.post("/login", passport.authenticate("local"), function (req, res) {
 		username: req.user.username
 	}, (err, info) => {
 		if (err) res.send({
-			message: err
+			success: false,
+			err
 		})
 		else {
 			res.send({
 				user: info,
+				success: true,
 				message: "User logged in."
 			})
 		}
