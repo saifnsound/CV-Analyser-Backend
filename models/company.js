@@ -35,7 +35,6 @@ var CompanySchema = new mongoose.Schema({
         type: String,
         unique: true
     },
-    jobs: [Object]
 });
 
 module.exports = mongoose.model("Company", CompanySchema);
