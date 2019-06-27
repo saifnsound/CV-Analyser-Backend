@@ -1,6 +1,10 @@
 var mongoose = require("mongoose");
 
 var JobSchema = new mongoose.Schema({
+    postedBy: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true
@@ -31,7 +35,13 @@ var JobSchema = new mongoose.Schema({
     workFromHome: {
         type: Boolean,
         required: true
-    }
+    },
+    cgpa: Number,
+    experience: Number,
+    tnt: String,
+    aoe: String,
+    languages: String,
+    priority: [String]
 });
 
 module.exports = mongoose.model("Job", JobSchema);

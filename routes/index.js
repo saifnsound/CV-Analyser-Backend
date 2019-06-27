@@ -30,14 +30,15 @@ router.post("/signup", (req, res) => {
 
 router.post("/login", passport.authenticate("local"), function (req, res) {
 	User.findOne({
-		username: req.user.username
+		username: req.body.username
 	}, (err, info) => {
-		if (err) res.send({
+		console.log(err);
+		if (err) res.json({
 			success: false,
-			err
+			message: err
 		})
 		else {
-			res.send({
+			res.json({
 				user: info,
 				success: true,
 				message: "User logged in."
@@ -52,7 +53,7 @@ router.get("/logout", (req, res) => {
 		if (err) {
 			return next(err);
 		}
-		res.send({
+		res.json({
 			message: "User logged out."
 		});
 	});
