@@ -47,13 +47,20 @@ router.post("/login", passport.authenticate("local"), function (req, res) {
 	})
 });
 
-router.get("/logout", (req, res) => {
+router.post("/logout", (req, res) => {
+	if (req.user) {
+		console.log(1);
+	}
 	req.logout();
 	req.session.destroy(function (err) {
 		if (err) {
-			return next(err);
+			res.json({
+				err,
+				success: false
+			});
 		}
 		res.json({
+			success: true,
 			message: "User logged out."
 		});
 	});
