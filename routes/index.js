@@ -48,9 +48,6 @@ router.post("/login", passport.authenticate("local"), function (req, res) {
 });
 
 router.post("/logout", (req, res) => {
-	if (req.user) {
-		console.log(1);
-	}
 	req.logout();
 	req.session.destroy(function (err) {
 		if (err) {

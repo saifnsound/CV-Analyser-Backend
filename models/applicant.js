@@ -34,6 +34,12 @@ var ApplicantSchema = new mongoose.Schema({
             type: String
         }
     },
+    occupation: String,
+    type: String,
+    resume: {
+        type: Object,
+        required: true
+    },
     username: {
         type: String,
         unique: true
